@@ -4,7 +4,8 @@
   "description": "bamazon store app",
   "main": "bamazonCustomer.js",
   "dependencies": {
-    "cli-table": "^0.3.1",
+    "chalk": "^2.4.1",
+    "cli-table-redemption": "^1.0.1",
     "dotenv": "^6.0.0",
     "inquirer": "^6.2.0",
     "mysql": "^2.16.0"

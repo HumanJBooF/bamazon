@@ -21,10 +21,14 @@ const options = () => {
     ]).then(answers => {
         switch (answers.choice) {
             case 'Customer':
-                showAll(show.askQuestion);
+                showAll(() => {
+                    show.askQuestion()
+                });
                 break;
             case 'Manager':
-                showAll(manager.managerDuties);
+                showAll(() => {
+                    manager.managerDuties();
+                });
                 break;
             case 'Supervisor':
                 showAll();
@@ -56,7 +60,7 @@ const options = () => {
                 );
             });
             console.log(chalk.yellow(table.toString())); // log table
-            cb()
+            cb();
         });
 
     }

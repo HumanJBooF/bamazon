@@ -2,7 +2,7 @@
   "name": "bamazon",
   "version": "1.0.0",
   "description": "bamazon store app",
-  "main": "bamazonCustomer.js",
+  "main": "bamazon.js",
   "dependencies": {
     "chalk": "^2.4.1",
     "cli-table-redemption": "^1.0.1",

@@ -56,20 +56,26 @@ const shopAgain = newTotal => {
             choices: ['Yes', 'No']
         }
     ]).then(answers => {
-        if (answers.add === 'Yes') {
-            let log = [
-                chalk`{green ~~~~~~~~~~~~~~~~~~~~~~~~~~~~}`,
-                chalk`\t{bold.green Amount left:${newTotal}}`,
-                chalk`{green ~~~~~~~~~~~~~~~~~~~~~~~~~~~~}`
-            ].join('\r\n');
-            console.log(log);
-            askQuestion();
-        } else {
-            console.log(chalk`{bold Have a great day!}`);
-            con.end(); // end connection
-        };
+        switch (answers.add) {
+            case 'Yes':
+                let log = [
+                    chalk`{green ~~~~~~~~~~~~~~~~~~~~~~~~~~~~}`,
+                    chalk`\t{bold.green Amount left:${newTotal}}`,
+                    chalk`{green ~~~~~~~~~~~~~~~~~~~~~~~~~~~~}`
+                ].join('\r\n');
+                console.log(log);
+                askQuestion();
+                break;
+            case 'No':
+                console.log(chalk`{bold Have a great day!}`);
+                con.end(); // end connection
+                break;
+            default:
+                console.log(chalk`{bold Goodbye! }`);
+                break;
+        }
     });
 };
 
-// showAll(); // call the showAll function
+
 module.exports.askQuestion = askQuestion;

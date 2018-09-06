@@ -5,6 +5,12 @@ const Table = require('cli-table-redemption');
 const chalk = require('chalk');
 const customer = require('./bamazonCustomer.js');
 const manager = require('./bamazonManager.js');
+let bold = chalk.green.bold; // chalk npm for colors
+const table = new Table({ // cli-table-redemption for a nice table building the head her
+    head: [bold('Id'), bold('Product Name'), bold('Department Name'), bold('Price'), bold('Quantity')],
+    colWidths: [5, 40, 30, 15, 10], // width of each column
+    colAligns: ['', '', '', 'right', 'right'], // right align price/quant
+});
 
 /* doing something a little bit different here
 making a function that will call each page depending on who you are
@@ -22,11 +28,11 @@ const options = () => {
         switch (answers.choice) {
             case 'Customer':
                 showAll(() => {
-                    question.askQuestion()
+                    customer();
                 });
                 break;
             case 'Manager':
-                manager.managerDuties();
+                manager();
                 break;
             case 'Supervisor':
                 showAll();
@@ -36,12 +42,6 @@ const options = () => {
 };
 // throw a callback in here so we can show the inventory then call the next function depending upon who it is
 const showAll = cb => {
-    let bold = chalk.green.bold; // chalk npm for colors
-    const table = new Table({ // cli-table-redemption for a nice table building the head her
-        head: [bold('Id'), bold('Product Name'), bold('Department Name'), bold('Price'), bold('Quantity')],
-        colWidths: [5, 40, 30, 15, 10], // width of each column
-        colAligns: ['', '', '', 'right', 'right'], // right align price/quant
-    });
 
     con.query('SELECT * FROM products', (err, res) => { // Grab everything in the DB
         if (err) throw err;
@@ -57,10 +57,9 @@ const showAll = cb => {
                 [id, name, department, price, stock] // filling the table with the data from bamazon DB
             );
         });
-        console.log(chalk.yellow(table.toString())); // log table
+        console.log(chalk`{yellow ${table.toString()}}`); // log table
         cb();
     });
-
 }
 
 options();

@@ -78,4 +78,4 @@ const shopAgain = newTotal => {
 };
 
 
-module.exports.askQuestion = askQuestion;
+module.exports = askQuestion;

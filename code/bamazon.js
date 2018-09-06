@@ -37,8 +37,8 @@ const options = () => {
             case 'Supervisor':
                 showAll();
                 break;
-        }
-    })
+        };
+    });
 };
 // throw a callback in here so we can show the inventory then call the next function depending upon who it is
 const showAll = cb => {
@@ -53,9 +53,7 @@ const showAll = cb => {
             let price = element.price;
             let stock = element.stock_quantity;
 
-            table.push(
-                [id, name, department, price, stock] // filling the table with the data from bamazon DB
-            );
+            table.push([id, name, department, price, stock]); // filling the table with the data from bamazon DB
         });
         console.log(chalk`{yellow ${table.toString()}}`); // log table
         cb();

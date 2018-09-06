@@ -24,7 +24,7 @@ const managerDuties = () => {
             case 'View All Inventory':
                 bamazon.showAll(() => {
                     reDo();
-                })
+                });
                 break;
             case 'View Low Inventory':
                 viewLowInv();
@@ -32,7 +32,7 @@ const managerDuties = () => {
             case 'Add to Inventory':
                 bamazon.showAll(() => {
                     addToInv();
-                })
+                });
                 break;
             case 'Add New Products':
                 addNewProducts();
@@ -90,13 +90,11 @@ const addToInv = () => {
                 let price = res[0].price;
                 let stock = res[0].stock_quantity;
 
-                table.push(
-                    [id, name, department, price, stock]
-                );
+                table.push([id, name, department, price, stock]);
                 console.log(chalk`{yellow ${table.toString()}}`);
-                reDo()
-            })
-        })
+                reDo();
+            });
+        });
     });
 };
 
@@ -115,7 +113,7 @@ const addNewProducts = () => {
         {
             name: 'price',
             type: 'input',
-            message: 'What is the price of the product?',
+            message: 'What is the price of the product?'
         },
         {
             name: 'quantity',
@@ -134,9 +132,9 @@ const addNewProducts = () => {
                 console.log(chalk`{bold Product Added!}`);
                 bamazon.showAll(() => {
                     reDo();
-                })
-            })
-    })
+                });
+            });
+    });
 };
 
 const reDo = () => {
@@ -150,7 +148,7 @@ const reDo = () => {
     ]).then(answers => {
         switch (answers.answer) {
             case 'Yes':
-                console.log('case 1');
+                // console.log('case 1');
                 managerDuties();
                 break;
             case 'No':

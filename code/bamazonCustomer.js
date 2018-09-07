@@ -9,17 +9,13 @@ const askQuestion = () => {
     con.query(`SELECT * FROM products`, (err, res) => { //querying first so we can get the length of our DB to match the input
         if (err) throw err;
         let dbLength = res.length
-        console.log(dbLength);
+        // console.log(dbLength);
         inquirer.prompt([{
             type: 'input',
             name: 'item_id',
             message: 'What item ID would you like to buy?',
             validate: (value) => {
-                if (value > dbLength) {
-                    console.log(chalk`{bold \r\n We don't have a product with ID: ${value}} Please try again \r\n`);
-                } else {
-                    return true;
-                }
+                return (value > dbLength) ? console.log(chalk`{bold \r\n We don't have a product with ID: ${value}} Please try again \r\n`) : true;
             }
         },
         {
@@ -38,15 +34,17 @@ const askQuestion = () => {
                 let item = res[0].product_name; // name of the item the user wants
                 let price = res[0].price; // price of that item
 
-                if (amountWanted <= inStock) { // if the amount wanted is less than or equal to whats in stock
-                    let newTotal = inStock - amountWanted; // subtract amount wanted from whats in stock
-                    price *= amountWanted; // times it by the price
-                    // console.log(item, price);
-                    console.log(chalk`{bold.green \r\nYou just bought: ${amountWanted} ${item}'s for the price of ${price}}`); // log what they bought and how much
-                    updateStore(newTotal, id); // send the new stock number and the id of the product to update store func
-                } else {
-                    console.log(chalk`{red We don't have that many!}`); // if not enough are in stock 
-                };
+                switch (amountWanted <= inStock) {
+                    case true:
+                        let newTotal = inStock - amountWanted; // subtract amount wanted from whats in stock
+                        price *= amountWanted; // times it by the price
+                        console.log(chalk`{bold.green \r\nYou just bought: ${amountWanted} ${item}'s for the price of $${price}}`); // log what they bought and how much
+                        updateStore(newTotal, id); // send the new stock number and the id of the product to update store func
+                        break;
+                    case false:
+                        console.log(chalk`{red We don't have that many!}`); // if not enough are in stock 
+                        shopAgain();
+                }
             });
         });
     })

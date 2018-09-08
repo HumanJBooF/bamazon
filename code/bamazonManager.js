@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 const con = require('./connection.js');
-const mysql = require('mysql');
 const Table = require('cli-table-redemption');
 const chalk = require('chalk');
 const bamazon = require('./bamazon.js');
@@ -10,6 +9,7 @@ const table = new Table({ // cli-table-redemption for a nice table building the 
     colWidths: [5, 40, 30, 15, 10], // width of each column
     colAligns: ['', '', '', 'right', 'right'], // right align price/quant
 });
+
 // Start the inquire prompt to ask the manager what they wanna do
 const managerDuties = () => {
     inquirer.prompt([
@@ -38,7 +38,7 @@ const managerDuties = () => {
                 addNewProducts();
                 break;
             default:
-                console.log(`There must be an error!`);
+                console.log(chalk`{red.bold There must be an error!}`);
                 con.end();
                 break;
         }
@@ -57,42 +57,57 @@ const viewLowInv = () => {
 
             table.push([id, name, department, price, stock]);
         });
-        console.log(chalk`{red ${table.toString()}}`);
-        console.log(`Looks like its time to restock`);
-        reDo();
+        switch (res.length === 0) {
+            case true:
+                console.log(chalk.bold('Fully Stocked!'));
+                reDo();
+                break;
+            case false:
+                console.log(chalk`{red ${table.toString()}\r\n}`);
+                console.log(chalk`{red.bold \t Looks like its time to restock\r\n}`);
+                reDo();
+                break;
+        }
     })
 };
 
 const addToInv = () => {
-    inquirer.prompt([
-        {
-            name: 'Id',
-            type: 'input',
-            message: 'Enter the ID number of the product you want to add inventory to.'
-        },
-        {
-            name: 'quantity',
-            type: 'input',
-            message: 'How many would you like to add?'
-        }
-    ]).then(answers => {
-        let id = answers.Id;
-        let quantity = answers.quantity;
+    con.query(`SELECT * FROM products`, (err, res) => {
+        if (err) throw err;
+        let dbLength = res.length
+        inquirer.prompt([
+            {
+                name: 'Id',
+                type: 'input',
+                message: 'Enter the ID number of the product you want to add inventory to.',
+                validate: (value) => {
+                    return (value > dbLength) ? console.log(chalk`{green.bold \r\n We don't have a product with ID: #${value} Please try again} \r\n`) : true;
+                }
+            },
+            {
+                name: 'quantity',
+                type: 'input',
+                message: 'How many would you like to add?'
+            }
+        ]).then(answers => {
+            let id = answers.Id;
+            let quantity = answers.quantity;
 
-        con.query(`UPDATE products SET stock_quantity = stock_quantity + ? WHERE item_id = ?`, [quantity, id], (err, res) => {
-            if (err) throw err;
-            console.log(chalk`{bold \r\n You updated your inventory!}`);
-            con.query(`SELECT * FROM products WHERE item_id = ?`, [id], (err, res) => {
+            con.query(`UPDATE products SET stock_quantity = stock_quantity + ? WHERE item_id = ?`, [quantity, id], (err, res) => {
                 if (err) throw err;
-                id = res[0].item_id;
-                let name = res[0].product_name;
-                let department = res[0].department_name;
-                let price = res[0].price;
-                let stock = res[0].stock_quantity;
+                console.log(chalk`{bold \r\n You updated your inventory!}`);
+                con.query(`SELECT * FROM products WHERE item_id = ?`, [id], (err, res) => {
+                    if (err) throw err;
+                    id = res[0].item_id;
+                    let name = res[0].product_name;
+                    let department = res[0].department_name;
+                    let price = res[0].price;
+                    let stock = res[0].stock_quantity;
 
-                table.push([id, name, department, price, stock]);
-                console.log(chalk`{yellow ${table.toString()}}`);
-                reDo();
+                    table.push([id, name, department, price, stock]);
+                    console.log(chalk`{yellow ${table.toString()}}`);
+                    reDo();
+                });
             });
         });
     });
@@ -129,7 +144,7 @@ const addNewProducts = () => {
                 stock_quantity: answers.quantity
             }, (err, res) => {
                 if (err) throw err;
-                console.log(chalk`{bold Product Added!}`);
+                console.log(chalk.bold('Product Added!'));
                 bamazon.showAll(() => {
                     reDo();
                 });
@@ -152,7 +167,7 @@ const reDo = () => {
                 managerDuties();
                 break;
             case 'No':
-                console.log(chalk`{bold Have a great day!}`);
+                console.log(chalk.bold('Have a great day!'));
                 con.end();
                 break;
             default:

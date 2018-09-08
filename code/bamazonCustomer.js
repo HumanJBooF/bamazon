@@ -1,9 +1,7 @@
 const inquirer = require('inquirer');
 const con = require('./connection.js');
-const mysql = require('mysql');
-const Table = require('cli-table-redemption');
 const chalk = require('chalk');
-let bold = chalk.green.bold; // chalk npm for colors
+
 
 const askQuestion = () => {
     con.query(`SELECT * FROM products`, (err, res) => { //querying first so we can get the length of our DB to match the input
@@ -15,7 +13,7 @@ const askQuestion = () => {
             name: 'item_id',
             message: 'What item ID would you like to buy?',
             validate: (value) => {
-                return (value > dbLength) ? console.log(chalk`{bold \r\n We don't have a product with ID: ${value}} Please try again \r\n`) : true;
+                return (value > dbLength) ? console.log(chalk`{green.bold \r\n We don't have a product with ID: #${value} Please try again} \r\n`) : true;
             }
         },
         {

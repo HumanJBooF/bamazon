@@ -40,6 +40,7 @@ const options = () => {
         };
     });
 };
+
 // throw a callback in here so we can show the inventory then call the next function depending upon who it is
 const showAll = cb => {
 

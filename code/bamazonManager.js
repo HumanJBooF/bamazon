@@ -17,7 +17,7 @@ const managerDuties = () => {
             name: 'duties',
             type: 'list',
             message: '\r\nMr.Manager how may I help you?',
-            choices: ['View All Inventory', 'View Low Inventory', 'Add to Inventory', 'Add New Products']
+            choices: ['View All Inventory', 'View Low Inventory', 'Add to Inventory', 'Add New Products', 'Leave']
         }
     ]).then(answers => { // depending on their answer 
         switch (answers.duties) {
@@ -36,6 +36,10 @@ const managerDuties = () => {
                 break;
             case 'Add New Products':
                 addNewProducts();
+                break;
+            case 'Leave':
+                console.log(bold('\r\n\t\tGoodbye!\r\n'));
+                con.end();
                 break;
             default:
                 console.log(chalk`{red.bold There must be an error!}`);
@@ -59,7 +63,12 @@ const viewLowInv = () => {
         });
         switch (res.length === 0) {
             case true:
-                console.log(chalk.bold('Fully Stocked!'));
+                let log = [
+                    `~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`,
+                    `\t\tFully Stocked!`,
+                    `~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+                ].join(`\r\n`);
+                console.log(bold(log))
                 reDo();
                 break;
             case false:

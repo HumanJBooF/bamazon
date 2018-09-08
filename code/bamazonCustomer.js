@@ -36,7 +36,7 @@ const askQuestion = () => {
                     case true:
                         let newTotal = inStock - amountWanted; // subtract amount wanted from whats in stock
                         price *= amountWanted; // times it by the price
-                        console.log(chalk`{bold.green \r\nYou just bought: ${amountWanted} ${item}'s for the price of $${price}}`); // log what they bought and how much
+                        console.log(chalk`{bold.green \r\nYou just bought: ${amountWanted} ${item}'s for the price of $${price.toFixed(2)}}`); // log what they bought and how much
                         let log = [
                             chalk`{green \t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}`,
                             chalk`\t\t\t\t{bold.green Amount left:${newTotal}}`,

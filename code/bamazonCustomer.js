@@ -37,6 +37,12 @@ const askQuestion = () => {
                         let newTotal = inStock - amountWanted; // subtract amount wanted from whats in stock
                         price *= amountWanted; // times it by the price
                         console.log(chalk`{bold.green \r\nYou just bought: ${amountWanted} ${item}'s for the price of $${price}}`); // log what they bought and how much
+                        let log = [
+                            chalk`{green \t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}`,
+                            chalk`\t\t\t\t{bold.green Amount left:${newTotal}}`,
+                            chalk`{green \t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}`
+                        ].join('\r\n');
+                        console.log(log);
                         updateStore(newTotal, id); // send the new stock number and the id of the product to update store func
                         break;
                     case false:
@@ -55,7 +61,7 @@ const updateStore = (newTotal, id) => { // update the store with the new stock q
     })
 };
 
-const shopAgain = newTotal => {
+const shopAgain = () => {
     inquirer.prompt([
         {
             name: 'add',
@@ -66,12 +72,6 @@ const shopAgain = newTotal => {
     ]).then(answers => {
         switch (answers.add) {
             case 'Yes':
-                let log = [
-                    chalk`{green ~~~~~~~~~~~~~~~~~~~~~~~~~~~~}`,
-                    chalk`\t{bold.green Amount left:${newTotal}}`,
-                    chalk`{green ~~~~~~~~~~~~~~~~~~~~~~~~~~~~}`
-                ].join('\r\n');
-                console.log(log);
                 askQuestion();
                 break;
             case 'No':
@@ -80,6 +80,7 @@ const shopAgain = newTotal => {
                 break;
             default:
                 console.log(chalk`{bold Goodbye! }`);
+                con.end();
                 break;
         }
     });

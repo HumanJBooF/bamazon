@@ -9,17 +9,20 @@ const askQuestion = () => {
         let dbLength = res.length
         // console.log(dbLength);
         inquirer.prompt([{
-            type: 'input',
             name: 'item_id',
+            type: 'input',
             message: 'What item ID would you like to buy?',
             validate: (value) => {
                 return (value > dbLength) ? console.log(chalk`{green.bold \r\n We don't have a product with ID: #${value} Please try again} \r\n`) : true;
             }
         },
         {
-            type: 'input',
             name: 'quantity',
+            type: 'input',
             message: 'How many would you like to purchase?',
+            validate: (value) => {
+                return value.match(/^[0-9]+$/) ? true : console.log(chalk`{bold.red \r\n\t\tENTER A NUMBER PLEASE!}`);
+            }
         }]).then(answers => {
             let id = answers.item_id; // making this a little smaller
             // look for the ID number
@@ -64,13 +67,13 @@ const updateStore = (newTotal, id) => { // update the store with the new stock q
 const shopAgain = () => {
     inquirer.prompt([
         {
-            name: 'add',
+            name: 'again',
             type: 'list',
             message: 'Do you want to purchase another item?',
             choices: ['Yes', 'No']
         }
     ]).then(answers => {
-        switch (answers.add) {
+        switch (answers.again) {
             case 'Yes':
                 askQuestion();
                 break;

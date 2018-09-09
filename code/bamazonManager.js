@@ -96,7 +96,10 @@ const addToInv = () => {
             {
                 name: 'quantity',
                 type: 'input',
-                message: 'How many would you like to add?'
+                message: 'How many would you like to add?',
+                validate: (value) => {
+                    return value.match(/^[0-9]+$/) ? true : console.log(chalk`{bold.red \r\n\tPLEASE ENTER A NUMBER}`);
+                }
             }
         ]).then(answers => {
             let id = answers.Id;
@@ -127,7 +130,7 @@ const addNewProducts = () => {
         {
             name: 'name',
             type: 'input',
-            message: 'Enter the name of the product'
+            message: 'Enter the name of the product.'
         },
         {
             name: 'department',
@@ -137,12 +140,18 @@ const addNewProducts = () => {
         {
             name: 'price',
             type: 'input',
-            message: 'What is the price of the product?'
+            message: 'What is the price of the product? (ex: 1200.00)f',
+            validate: (value) => {
+                return value.match(/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/) ? true : console.log(chalk`{bold.green PLEASE ENTER A NUMBER!}`);
+            }
         },
         {
             name: 'quantity',
             type: 'input',
-            message: 'How many would you like to add?'
+            message: 'How many would you like to add?',
+            validate: (value) => {
+                return value.match(/^[0-9]+$/) ? true : console.log(chalk`{bold.red \r\n\tPLEASE ENTER A NUMBER}`);
+            }
         }
     ]).then(answers => {
         con.query(`INSERT INTO products SET ?`,

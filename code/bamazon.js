@@ -1,10 +1,10 @@
 const inquirer = require('inquirer');
 const con = require('./connection.js');
-const mysql = require('mysql');
 const Table = require('cli-table-redemption');
 const chalk = require('chalk');
 const customer = require('./bamazonCustomer.js');
 const manager = require('./bamazonManager.js');
+const supervisor = require('./bamazonSupervisor.js');
 let bold = chalk.green.bold; // chalk npm for colors
 const table = new Table({ // cli-table-redemption for a nice table building the head her
     head: [bold('Id'), bold('Product Name'), bold('Department Name'), bold('Price'), bold('Quantity')],
@@ -19,8 +19,8 @@ const options = () => {
 
     inquirer.prompt([
         {
-            type: 'list',
             name: 'choice',
+            type: 'list',
             message: 'Who are you?',
             choices: ['Manager', 'Supervisor', 'Customer']
         }
@@ -35,7 +35,13 @@ const options = () => {
                 manager();
                 break;
             case 'Supervisor':
-                showAll();
+                showAll(() => {
+                    supervisor();
+                });
+                break;
+            default:
+                console.log(chalk`{bold.green Have a Great Day!}`);
+                con.end();
                 break;
         };
     });

@@ -17,7 +17,7 @@ const managerDuties = () => {
             name: 'duties',
             type: 'list',
             message: '\r\nMr.Manager how may I help you?',
-            choices: ['View All Inventory', 'View Low Inventory', 'Add to Inventory', 'Add New Products', 'Leave']
+            choices: ['View All Inventory', 'View Low Inventory', 'Add to Inventory', 'Add New Products', 'Go back to options', 'Leave']
         }
     ]).then(answers => { // depending on their answer 
         switch (answers.duties) {
@@ -36,6 +36,9 @@ const managerDuties = () => {
                 break;
             case 'Add New Products':
                 addNewProducts();
+                break;
+            case 'Go back to options':
+                bamazon.options();
                 break;
             case 'Leave':
                 console.log(bold('\r\n\t\tGoodbye!\r\n'));
@@ -142,7 +145,7 @@ const addNewProducts = () => {
             type: 'input',
             message: 'What is the price of the product? (ex: 1200.00)f',
             validate: (value) => {
-                return value.match(/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/) ? true : console.log(chalk`{bold.green PLEASE ENTER A NUMBER!}`);
+                return value.match(/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/) ? true : console.log(chalk`{bold.green PLEASE ENTER A NUMBER WITH THE FORMAT OF 1111.00!}`);
             }
         },
         {

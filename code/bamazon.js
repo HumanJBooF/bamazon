@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const customer = require('./bamazonCustomer.js');
 const manager = require('./bamazonManager.js');
 const supervisor = require('./bamazonSupervisor.js');
-let bold = chalk.green.bold; // chalk npm for colors
+const bold = chalk.green.bold; // chalk npm for colors
 const table = new Table({ // cli-table-redemption for a nice table building the head her
     head: [bold('Id'), bold('Product Name'), bold('Department Name'), bold('Price'), bold('Quantity')],
     colWidths: [5, 40, 30, 15, 10], // width of each column
@@ -69,4 +69,6 @@ const showAll = cb => {
 
 options();
 
+
 module.exports.showAll = showAll;
+module.exports.options = options;

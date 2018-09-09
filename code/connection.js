@@ -11,9 +11,9 @@ const con = mysql.createConnection({
 });
 
 // make the connection to bamazon db
-// con.connect(err => {
-//     if (err) throw err;
-//     console.log(`Connected as: ${con.threadId}`); // log the id
-// });
+con.connect(err => {
+    if (err) throw err;
+    // console.log(`Connected as: ${con.threadId}`); // log the id
+});
 
 module.exports = con;

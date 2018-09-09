@@ -15,8 +15,7 @@ const askQuestion = () => {
             validate: (value) => {
                 return (value > dbLength) ? console.log(chalk`{green.bold \r\n We don't have a product with ID: #${value} Please try again} \r\n`) : true;
             }
-        },
-        {
+        }, {
             name: 'quantity',
             type: 'input',
             message: 'How many would you like to purchase?',
@@ -55,6 +54,8 @@ const askQuestion = () => {
                         shopAgain();
                 }
             });
+        }).catch(err => {
+            if (err) throw err;
         });
     });
 };
@@ -98,6 +99,8 @@ const shopAgain = () => {
                 con.end();
                 break;
         }
+    }).catch(err => {
+        if (err) throw err;
     });
 };
 

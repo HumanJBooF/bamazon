@@ -3,6 +3,12 @@ const inquirer = require('inquirer');
 const Table = require('cli-table-redemption');
 const chalk = require('chalk');
 const bamazon = require('./bamazon.js');
+const bold = chalk.green.bold; // chalk npm for colors
+const table = new Table({ // cli-table-redemption for a nice table building the head her
+    head: [bold('Id'), bold('Department Name'), bold('Overhead Cost'), bold('Product Sales'), bold('Total Profits')],
+    colWidths: [5, 40, 30, 20, 20], // width of each column
+    colAligns: ['', '', '', 'right', 'right'], // right align price/quant
+});
 
 const askWhatToDo = () => {
     inquirer.prompt([
@@ -32,11 +38,29 @@ const askWhatToDo = () => {
                 con.end();
                 break;
         };
+    }).catch(err => {
+        if (err) throw err;
     });
 };
 
 const viewByDepartment = () => {
+    let query = `SELECT departments.department_id, departments.department_name, departments.overhead_cost, CASE WHEN SUM(products.product_sales) IS NULL THEN 0 ELSE SUM(products.product_sales) END AS product_sales FROM departments LEFT JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_id, departments.department_name;`;
+    con.query(query,
+        (err, res) => {
+            if (err) throw err;
 
+            res.forEach(element => {
+                let id = element.department_id;
+                let name = element.department_name;
+                let overhead = parseInt(element.overhead_cost).toFixed(2);
+                let productSales = parseInt(element.product_sales).toFixed(2);
+                let total = (productSales - overhead).toFixed(2);
+
+                table.push([id, name, overhead, productSales, total]);
+            })
+            console.log(chalk`{yellow ${table.toString()}}`)
+            askAgain();
+        })
 };
 
 const createNewDepartment = () => {
@@ -64,7 +88,9 @@ const createNewDepartment = () => {
             console.log(chalk`{bold.green Department Added!}`);
             askAgain();
         })
-    })
+    }).catch(err => {
+        if (err) throw err;
+    });
 };
 
 const askAgain = () => {
@@ -92,6 +118,8 @@ const askAgain = () => {
                 con.end();
                 break;
         }
-    })
+    }).catch(err => {
+        if (err) throw err;
+    });
 }
 module.exports = askWhatToDo;

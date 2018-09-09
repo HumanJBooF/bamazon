@@ -124,6 +124,8 @@ const addToInv = () => {
                     reDo();
                 });
             });
+        }).catch(err => {
+            if (err) throw err;
         });
     });
 };
@@ -165,12 +167,16 @@ const addNewProducts = () => {
                 stock_quantity: answers.quantity
             }, (err, res) => {
                 if (err) throw err;
-                console.log(chalk.bold('Product Added!'));
-                bamazon.showAll(() => {
-                    reDo();
-                });
+                let name = answers.name;
+                let department = answers.department;
+                let stock = answers.quantity;
+                let price = (answers.price).toFixed(2);
+                console.log(chalk.bold(`You added ${stock} ${name}'s to ${department} department at a price of $${price}`));
+                reDo();
             });
-    });
+    }).catch(err => {
+        if (err) throw err;
+    });;
 };
 
 const reDo = () => {
@@ -195,7 +201,9 @@ const reDo = () => {
                 con.end();
                 break;
         }
-    })
+    }).catch(err => {
+        if (err) throw err;
+    });
 };
 
 module.exports = managerDuties;

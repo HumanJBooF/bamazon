@@ -35,9 +35,7 @@ const options = () => {
                 manager();
                 break;
             case 'Supervisor':
-                showAll(() => {
                     supervisor();
-                });
                 break;
             default:
                 console.log(chalk`{bold.green Have a Great Day!}`);

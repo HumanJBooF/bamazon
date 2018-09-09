@@ -10,6 +10,7 @@ const table = new Table({ // cli-table-redemption for a nice table building the 
     head: [bold('Id'), bold('Product Name'), bold('Department Name'), bold('Price'), bold('Quantity')],
     colWidths: [5, 40, 30, 15, 10], // width of each column
     colAligns: ['', '', '', 'right', 'right'], // right align price/quant
+    style: { 'padding-top': 100 }
 });
 
 /* doing something a little bit different here
@@ -22,7 +23,7 @@ const options = () => {
             name: 'choice',
             type: 'list',
             message: 'Who are you?',
-            choices: ['Manager', 'Supervisor', 'Customer']
+            choices: ['Customer', 'Manager', 'Supervisor']
         }
     ]).then(answers => {
         switch (answers.choice) {
@@ -35,7 +36,7 @@ const options = () => {
                 manager();
                 break;
             case 'Supervisor':
-                    supervisor();
+                supervisor();
                 break;
             default:
                 console.log(chalk`{bold.green Have a Great Day!}`);
@@ -60,7 +61,8 @@ const showAll = cb => {
 
             table.push([id, name, department, price, stock]); // filling the table with the data from bamazon DB
         });
-        console.log(chalk`{yellow ${table.toString()}}`); // log table
+
+        console.log(chalk`{yellow \r\n\r\n${table.toString()}}`); // log table
         cb();
     });
 }

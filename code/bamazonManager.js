@@ -30,9 +30,7 @@ const managerDuties = () => {
                 viewLowInv();
                 break;
             case 'Add to Inventory':
-                bamazon.showAll(() => {
-                    addToInv();
-                });
+                addToInv();
                 break;
             case 'Add New Products':
                 addNewProducts();
@@ -61,7 +59,7 @@ const viewLowInv = () => {
             let department = element.department_name;
             let price = element.price;
             let stock = element.stock_quantity;
-
+            price = '$' + price
             table.push([id, name, department, price, stock]);
         });
         switch (res.length === 0) {

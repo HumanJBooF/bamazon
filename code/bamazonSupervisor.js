@@ -43,18 +43,24 @@ const askWhatToDo = () => {
     });
 };
 
+// This took me the most time, I could not find a solid way to do this 
+// but after a long time of searching and throwing things together this is what we got, it works
 const viewByDepartment = () => {
+    // putting it into a query variable because of the lenght
     let query = `SELECT departments.department_id, departments.department_name, departments.overhead_cost, CASE WHEN SUM(products.product_sales) IS NULL THEN 0 ELSE SUM(products.product_sales) END AS product_sales FROM departments LEFT JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_id, departments.department_name;`;
     con.query(query,
         (err, res) => {
             if (err) throw err;
-
+            // loop the response and grab each column 
             res.forEach(element => {
                 let id = element.department_id;
                 let name = element.department_name;
-                let overhead = parseInt(element.overhead_cost).toFixed(2);
-                let productSales = parseInt(element.product_sales).toFixed(2);
+                let overhead = parseInt(element.overhead_cost).toFixed(2); // integers and making sure there is 2 decimal places
+                let productSales = parseInt(element.product_sales).toFixed(2);// same here
                 let total = (productSales - overhead).toFixed(2);
+                overhead = '$' + overhead; // making sure these will all have $ in front in the table
+                productSales = '$' + productSales;
+                total = '$' + total;
 
                 table.push([id, name, overhead, productSales, total]);
             })
@@ -122,4 +128,5 @@ const askAgain = () => {
         if (err) throw err;
     });
 }
+
 module.exports = askWhatToDo;

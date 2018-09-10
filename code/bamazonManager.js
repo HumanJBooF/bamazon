@@ -17,7 +17,7 @@ const managerDuties = () => {
             name: 'duties',
             type: 'list',
             message: '\r\nMr.Manager how may I help you?',
-            choices: ['View All Inventory', 'View Low Inventory', 'Add to Inventory', 'Add New Products', 'Go back to options', 'Leave']
+            choices: ['View All Inventory', 'View Low Inventory', 'Add to Inventory', 'Add New Products', 'Leave']
         }
     ]).then(answers => { // depending on their answer 
         switch (answers.duties) {
@@ -34,9 +34,6 @@ const managerDuties = () => {
                 break;
             case 'Add New Products':
                 addNewProducts();
-                break;
-            case 'Go back to options':
-                bamazon.options();
                 break;
             case 'Leave':
                 console.log(bold('\r\n\t\tGoodbye!\r\n'));
@@ -168,8 +165,8 @@ const addNewProducts = () => {
                 let name = answers.name;
                 let department = answers.department;
                 let stock = answers.quantity;
-                let price = (answers.price).toFixed(2);
-                console.log(chalk.bold(`You added ${stock} ${name}'s to ${department} department at a price of $${price}`));
+                let price = answers.price;
+                console.log(bold(`You added ${stock} ${name}'s to ${department} department at a price of $${price}`));
                 reDo();
             });
     }).catch(err => {

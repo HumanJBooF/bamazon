@@ -62,7 +62,7 @@ const showAll = cb => {
             table.push([id, name, department, price, stock]); // filling the table with the data from bamazon DB
         });
 
-        console.log(chalk`{yellow \r\n\r\n${table.toString()}}`); // log table
+        console.log(chalk`{yellow ${table.toString()}}`); // log table
         cb();
     });
 }

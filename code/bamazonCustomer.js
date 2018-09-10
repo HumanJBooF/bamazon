@@ -80,7 +80,7 @@ const shopAgain = () => {
             name: 'again',
             type: 'list',
             message: 'Do you want to purchase another item?',
-            choices: ['Yes', 'No', 'Change to manager/supervisor']
+            choices: ['Yes', 'No']
         }
     ]).then(answers => {
         switch (answers.again) {
@@ -90,9 +90,6 @@ const shopAgain = () => {
             case 'No':
                 console.log(chalk`{bold Have a great day!}`);
                 con.end(); // end connection
-                break;
-            case 'Change to manager/supervisor':
-                bamazon.options();
                 break;
             default:
                 console.log(chalk`{bold Goodbye! }`);

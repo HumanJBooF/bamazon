@@ -16,7 +16,7 @@ const askWhatToDo = () => {
             name: 'super',
             type: 'list',
             message: '\r\n Hello Mr.Supervisor, Great to see you! \r\n What would you like to do?',
-            choices: ['View Product Sales By Department', 'Create New Department', 'Go back to options', 'Leave']
+            choices: ['View Product Sales By Department', 'Create New Department', 'Leave']
         }
     ]).then(answers => {
         switch (answers.super) {
@@ -25,9 +25,6 @@ const askWhatToDo = () => {
                 break;
             case 'Create New Department':
                 createNewDepartment();
-                break;
-            case 'Go back to options':
-                bamazon.options();
                 break;
             case 'Leave':
                 console.log(chalk`{bold.green Come back soon sir!}`);

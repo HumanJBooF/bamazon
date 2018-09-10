@@ -43,7 +43,7 @@ const askWhatToDo = () => {
 // This took me the most time, I could not find a solid way to do this 
 // but after a long time of searching and throwing things together this is what we got, it works
 const viewByDepartment = () => {
-    // putting it into a query variable because of the lenght
+    // putting it into a query variable because of the length
     let query = `SELECT departments.department_id, departments.department_name, departments.overhead_cost, CASE WHEN SUM(products.product_sales) IS NULL THEN 0 ELSE SUM(products.product_sales) END AS product_sales FROM departments LEFT JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_id, departments.department_name;`;
     con.query(query,
         (err, res) => {

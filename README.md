@@ -1,7 +1,6 @@
 # Bamazon 
 
-### A 'amazon' like store-front
-
+### A "amazon" like store-front
 
 ## Set up
 
@@ -20,7 +19,51 @@
 
 1. `bamazon,js`
 
-    [customerGif](./gifs/customer_1.gif)
+- A starting page will ask you if you are customer, manager or supervisor then send you to where you need to go
 
 -----------------------
 
+1. `bamazonCustomer.js`
+
+- View all inventory
+- Buy a product by Item Id 
+
+![customerGif](./code/gifs/customer_1.gif)
+
+-----------------------
+
+1. `bamazonManager.js`
+
+- View all inventory
+- View inventory that is below 5 in stock
+
+![manager](./code/gifs/manager1.gif)
+
+- Add to inventory stock
+- Add new inventory product
+
+-----------------------
+
+![manager](./code/gifs/manager2.gif)
+
+1. `bamazonSupervisor.js`
+
+- View all departments
+- Add new departments
+
+![supervisor](./code/gifs/supervisor.gif)
+
+
+-----------------------
+
+## Technology Used
+
+* Node.js
+* [NPM chalk](https://www.npmjs.com/package/chalk)
+* [NPM inquirer](https://www.npmjs.com/package/inquirer)
+* [NPM cli-table-redemption](https://www.npmjs.com/package/cli-table-redemption)
+* [NPM mysql](https://www.npmjs.com/package/mysql)
+* [NPM dotenv](https://www.npmjs.com/package/dotenv)
+
+## Author
+### **Joshua LeBoeuf** 

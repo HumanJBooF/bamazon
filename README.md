@@ -31,14 +31,8 @@
 - View all inventory
 - Buy a product by Item Id 
 
+
 ![customerGif](./code/gifs/customer.gif)
-
------------------------
-
-- **ERROR**
-- **Checks to make sure the ID is in the DB**
-
-![error](./code/img/iderror.png) 
 
 -----------------------
 
@@ -56,13 +50,6 @@
 
 -----------------------
 
-- **ERROR**
-- **Checks if you have no more then 2 decimal places**
-
-![error](./code/img/moneyPNG.png)
-
------------------------
-
 1. `bamazonSupervisor.js`
 
 - View all departments
@@ -75,14 +62,14 @@
 
 ## Technology Used
 
-     Node.js
-     Javascript
-     SQL/MySQL
-     [NPM chalk](https://www.npmjs.com/package/chalk)
-     [NPM inquirer](https://www.npmjs.com/package/inquirer)
-     [NPM cli-table-redemption](https://www.npmjs.com/package/cli-table-redemption)
-     [NPM mysql](https://www.npmjs.com/package/mysql)
-     [NPM dotenv](https://www.npmjs.com/package/dotenv)
+* Node.js
+* Javascript
+* SQL/MySQL 
+* [NPM chalk](https://www.npmjs.com/package/chalk)
+* [NPM inquirer](https://www.npmjs.com/package/inquirer)
+* [NPM cli-table-redemption](https://www.npmjs.com/package/cli-table-redemption)
+* [NPM mysql](https://www.npmjs.com/package/mysql)
+* [NPM dotenv](https://www.npmjs.com/package/dotenv)
 
 ## Author
 ### **Joshua LeBoeuf**

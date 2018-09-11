@@ -18,7 +18,7 @@
 - connect to workbench or whatever mysql database you are using via SSH tunnel
 - run bamazon.js
 
-### What Each JavaScript Does
+### What Each JavaScript File Does
 
 1. `bamazon,js`
 
@@ -31,14 +31,14 @@
 - View all inventory
 - Buy a product by Item Id 
 
-![customerGif](./code/gifs/customer_1.gif)
+![customerGif](./code/gifs/customer.gif)
 
 -----------------------
 
 - **ERROR**
 - **Checks to make sure the ID is in the DB**
 
-![error](./code/img/iderror.png)
+![error](./code/img/iderror.png) 
 
 -----------------------
 

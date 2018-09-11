@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const con = require('./connection.js');
 const chalk = require('chalk');
-const bamazon = require('./bamazon.js');
+
 
 const askQuestion = () => {
     con.query(`SELECT * FROM products`, (err, res) => { //querying first so we can get the length of our DB to match the input

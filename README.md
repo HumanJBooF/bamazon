@@ -35,6 +35,13 @@
 
 -----------------------
 
+- **ERROR**
+- **Checks to make sure the ID is in the DB**
+
+![error](./code/img/iderror.png)
+
+-----------------------
+
 1. `bamazonManager.js`
 
 - View all inventory
@@ -46,6 +53,13 @@
 - Add new inventory product
 
 ![manager](./code/gifs/manager2.gif)
+
+-----------------------
+
+- **ERROR**
+- **Checks if you have no more then 2 decimal places**
+
+![error](./code/img/moneyPNG.png)
 
 -----------------------
 

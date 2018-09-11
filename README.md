@@ -1,15 +1,18 @@
 # Bamazon 
 
-### A "amazon" like store-front
+### A *"amazon"* like store-front
 
 ## Set up
 
 - Clone repo.
 - Open your favorite command prompt
 - cd to the repo folder
-- (optional) Once you are in the folder with the .vagrantfile run 'vagrantup'
-- after the box is set up run 'vagrant ssh'
-- cd /var/code
+    - *__Optional__* 
+    - *Optional steps to run it on a VM*
+    - *Once you are in the folder with the .vagrantfile run 'vagrant up'*
+    - *after the box is set up run 'vagrant ssh'*
+    - *cd /var/code*
+- cd code
 - run 'npm install'
 - change the password in the connection.js to what you mysql password is
 - connect to workbench or whatever mysql database you are using via SSH tunnel
@@ -42,9 +45,9 @@
 - Add to inventory stock
 - Add new inventory product
 
------------------------
-
 ![manager](./code/gifs/manager2.gif)
+
+-----------------------
 
 1. `bamazonSupervisor.js`
 
@@ -58,12 +61,14 @@
 
 ## Technology Used
 
-* Node.js
-* [NPM chalk](https://www.npmjs.com/package/chalk)
-* [NPM inquirer](https://www.npmjs.com/package/inquirer)
-* [NPM cli-table-redemption](https://www.npmjs.com/package/cli-table-redemption)
-* [NPM mysql](https://www.npmjs.com/package/mysql)
-* [NPM dotenv](https://www.npmjs.com/package/dotenv)
+     Node.js
+     Javascript
+     SQL/MySQL
+     [NPM chalk](https://www.npmjs.com/package/chalk)
+     [NPM inquirer](https://www.npmjs.com/package/inquirer)
+     [NPM cli-table-redemption](https://www.npmjs.com/package/cli-table-redemption)
+     [NPM mysql](https://www.npmjs.com/package/mysql)
+     [NPM dotenv](https://www.npmjs.com/package/dotenv)
 
 ## Author
-### **Joshua LeBoeuf** 
+### **Joshua LeBoeuf**
